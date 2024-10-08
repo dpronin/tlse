@@ -13885,12 +13885,12 @@ static inline unsigned RORc(unsigned word, const int i) {
 /* 64-bit Rotates */
 #if !defined(__STRICT_ANSI__) && defined(__GNUC__) && defined(__x86_64__) && !defined(LTC_NO_ASM)
 
-static inline unsigned long ROL64(unsigned long word, int i) {
-    asm ("rolq %%cl,%0"
-         : "=r" (word)
-         : "0" (word), "c" (i));
-    return word;
-}
+// static inline unsigned long ROL64(unsigned long word, int i) {
+//     asm ("rolq %%cl,%0"
+//          : "=r" (word)
+//          : "0" (word), "c" (i));
+//     return word;
+// }
 
 static inline unsigned long ROR64(unsigned long word, int i) {
     asm ("rorq %%cl,%0"
@@ -18861,7 +18861,7 @@ int der_decode_printable_string(const unsigned char *in, unsigned long inlen,
 int der_decode_sequence_ex(const unsigned char *in, unsigned long inlen,
                            ltc_asn1_list *list, unsigned long outlen, int ordered) {
     int           err, type;
-    unsigned long size, x, y, z, i, blksize;
+    unsigned long size, x, y, z, i, blksize = 0;
     void          *data;
 
     LTC_ARGCHK(in != NULL);
@@ -22404,7 +22404,7 @@ int der_length_printable_string(const unsigned char *octets, unsigned long nocte
 int der_length_sequence(ltc_asn1_list *list, unsigned long inlen,
                         unsigned long *outlen) {
     int           err, type;
-    unsigned long size, x, y, z, i;
+    unsigned long size, x, y, z __attribute_maybe_unused__, i;
     void          *data;
 
     LTC_ARGCHK(list != NULL);
@@ -28196,7 +28196,7 @@ int rand_prime(void *N, long len, prng_state *prng, int wprng) {
 #ifdef LTC_DEVRANDOM
 /* on *NIX read /dev/random */
 static unsigned long rng_nix(unsigned char *buf, unsigned long len,
-                             void (*callback)(void)) {
+                             void (*callback)(void) __attribute_maybe_unused__) {
  #ifdef LTC_NO_FILE
     return 0;
  #else
@@ -29410,7 +29410,7 @@ const struct ltc_prng_descriptor sprng_desc =
    @param prng     [out] The PRNG state to initialize
    @return CRYPT_OK if successful
  */
-int sprng_start(prng_state *prng) {
+int sprng_start(prng_state *prng __attribute_maybe_unused__) {
     return CRYPT_OK;
 }
 
@@ -29421,7 +29421,7 @@ int sprng_start(prng_state *prng) {
    @param prng     PRNG state to update
    @return CRYPT_OK if successful
  */
-int sprng_add_entropy(const unsigned char *in, unsigned long inlen, prng_state *prng) {
+int sprng_add_entropy(const unsigned char *in __attribute_maybe_unused__, unsigned long inlen __attribute_maybe_unused__, prng_state *prng __attribute_maybe_unused__) {
     return CRYPT_OK;
 }
 
@@ -29430,7 +29430,7 @@ int sprng_add_entropy(const unsigned char *in, unsigned long inlen, prng_state *
    @param prng   The PRNG to make active
    @return CRYPT_OK if successful
  */
-int sprng_ready(prng_state *prng) {
+int sprng_ready(prng_state *prng __attribute_maybe_unused__) {
     return CRYPT_OK;
 }
 
@@ -29441,7 +29441,7 @@ int sprng_ready(prng_state *prng) {
    @param prng     The active PRNG to read from
    @return Number of octets read
  */
-unsigned long sprng_read(unsigned char *out, unsigned long outlen, prng_state *prng) {
+unsigned long sprng_read(unsigned char *out, unsigned long outlen, prng_state *prng __attribute_maybe_unused__) {
     LTC_ARGCHK(out != NULL);
     return rng_get_bytes(out, outlen, NULL);
 }
@@ -29451,7 +29451,7 @@ unsigned long sprng_read(unsigned char *out, unsigned long outlen, prng_state *p
    @param prng   The PRNG to terminate
    @return CRYPT_OK if successful
  */
-int sprng_done(prng_state *prng) {
+int sprng_done(prng_state *prng __attribute_maybe_unused__) {
     return CRYPT_OK;
 }
 
@@ -29462,7 +29462,7 @@ int sprng_done(prng_state *prng) {
    @param prng      The PRNG to export
    @return CRYPT_OK if successful
  */
-int sprng_export(unsigned char *out, unsigned long *outlen, prng_state *prng) {
+int sprng_export(unsigned char *out __attribute_maybe_unused__, unsigned long *outlen, prng_state *prng __attribute_maybe_unused__) {
     LTC_ARGCHK(outlen != NULL);
 
     *outlen = 0;
@@ -29476,7 +29476,7 @@ int sprng_export(unsigned char *out, unsigned long *outlen, prng_state *prng) {
    @param prng     The PRNG to import
    @return CRYPT_OK if successful
  */
-int sprng_import(const unsigned char *in, unsigned long inlen, prng_state *prng) {
+int sprng_import(const unsigned char *in __attribute_maybe_unused__, unsigned long inlen __attribute_maybe_unused__, prng_state *prng __attribute_maybe_unused__) {
     return CRYPT_OK;
 }
 
@@ -31007,7 +31007,7 @@ static const ulong32 TE0[256] = {
 };
 
 #ifndef PELI_TAB
-static const ulong32 Te4[256] = {
+static const ulong32 Te4[256] __attribute_maybe_unused__ = {
     0x63636363UL, 0x7c7c7c7cUL, 0x77777777UL, 0x7b7b7b7bUL,
     0xf2f2f2f2UL, 0x6b6b6b6bUL, 0x6f6f6f6fUL, 0xc5c5c5c5UL,
     0x30303030UL, 0x01010101UL, 0x67676767UL, 0x2b2b2b2bUL,
@@ -32666,7 +32666,7 @@ int ECB_TEST(void)
 /** Terminate the context
    @param skey    The scheduled key
 */
-void ECB_DONE(symmetric_key *skey)
+void ECB_DONE(symmetric_key *skey __attribute_maybe_unused__)
 {
   //LTC_UNUSED_PARAM(skey);
 }

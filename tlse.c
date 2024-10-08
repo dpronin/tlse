@@ -1090,7 +1090,8 @@ static struct ECCCurveParameters secp192r1 = {
     "188DA80EB03090F67CBF20EB43A18800F4FF0AFD82FF1012", // Gx
     "07192B95FFC8DA78631011ED6B24CDD573F977A11E794811", // Gy
     "FFFFFFFFFFFFFFFFFFFFFFFF99DEF836146BC9B1B4D22831", // order (n)
-    "1.2.840.10045.3.1.1"                               // oid
+    "1.2.840.10045.3.1.1",                              // oid
+    {},
 };
 
 
@@ -1104,7 +1105,8 @@ static struct ECCCurveParameters secp224r1 = {
     "B70E0CBD6BB4BF7F321390B94A03C1D356C21122343280D6115C1D21", // Gx
     "BD376388B5F723FB4C22DFE6CD4375A05A07476444D5819985007E34", // Gy
     "FFFFFFFFFFFFFFFFFFFFFFFFFFFF16A2E0B8F03E13DD29455C5C2A3D", // order (n)
-    "1.3.132.0.33"                                              // oid
+    "1.3.132.0.33",                                             // oid
+    {},
 };
 
 static struct ECCCurveParameters secp224k1 = {
@@ -1117,7 +1119,8 @@ static struct ECCCurveParameters secp224k1 = {
     "A1455B334DF099DF30FC28A169A467E9E47075A90F7E650EB6B7A45C", // Gx
     "7E089FED7FBA344282CAFBD6F7E319F7C0B0BD59E2CA4BDB556D61A5", // Gy
     "0000000000000000000000000001DCE8D2EC6184CAF0A971769FB1F7", // order (n)
-    "1.3.132.0.32"                                              // oid
+    "1.3.132.0.32",                                             // oid
+    {},
 };
 
 static struct ECCCurveParameters secp256r1 = {
@@ -1130,7 +1133,8 @@ static struct ECCCurveParameters secp256r1 = {
     "6B17D1F2E12C4247F8BCE6E563A440F277037D812DEB33A0F4A13945D898C296", // Gx
     "4FE342E2FE1A7F9B8EE7EB4A7C0F9E162BCE33576B315ECECBB6406837BF51F5", // Gy
     "FFFFFFFF00000000FFFFFFFFFFFFFFFFBCE6FAADA7179E84F3B9CAC2FC632551", // order (n)
-    "1.2.840.10045.3.1.7"                                               // oid
+    "1.2.840.10045.3.1.7",                                              // oid
+    {},
 };
 
 static struct ECCCurveParameters secp256k1 = {
@@ -1143,7 +1147,8 @@ static struct ECCCurveParameters secp256k1 = {
     "79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798", // Gx
     "483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8", // Gy
     "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141", // order (n)
-    "1.3.132.0.10"                                                      // oid
+    "1.3.132.0.10",                                                     // oid
+    {},
 };
 
 static struct ECCCurveParameters secp384r1 = {
@@ -1156,7 +1161,8 @@ static struct ECCCurveParameters secp384r1 = {
     "AA87CA22BE8B05378EB1C71EF320AD746E1D3B628BA79B9859F741E082542A385502F25DBF55296C3A545E3872760AB7", // Gx
     "3617DE4A96262C6F5D9E98BF9292DC29F8F41DBD289A147CE9DA3113B5F0B8C00A60B1CE1D7E819D7A431D7C90EA0E5F", // Gy
     "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC7634D81F4372DDF581A0DB248B0A77AECEC196ACCC52973", // order (n)
-    "1.3.132.0.34"                                                                                      // oid
+    "1.3.132.0.34",                                                                                     // oid
+    {},
 };
 
 static struct ECCCurveParameters secp521r1 = {
@@ -1169,7 +1175,8 @@ static struct ECCCurveParameters secp521r1 = {
     "00C6858E06B70404E9CD9E3ECB662395B4429C648139053FB521F828AF606B4D3DBAA14B5E77EFE75928FE1DC127A2FFA8DE3348B3C1856A429BF97E7E31C2E5BD66", // Gx
     "011839296A789A3BC0045C8A5FB42C7D1BD998F54449579B446817AFBD17273E662C97EE72995EF42640C550B9013FAD0761353C7086A272C24088BE94769FD16650", // Gy
     "01FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA51868783BF2F966B7FCC0148F709A5D03BB5C9B8899C47AEBB6FB71E91386409", // order (n)
-    "1.3.132.0.35"                                                                                                                          // oid
+    "1.3.132.0.35",                                                                                                                         // oid
+    {},
 };
 
 #ifdef TLS_CURVE25519
@@ -1184,7 +1191,8 @@ static struct ECCCurveParameters x25519 = {
     "0000000000000000000000000000000000000000000000000000000000000009", // Gx
     "20AE19A1B8A086B4E01EDD2C7748D14C923D4D7E6D7C61B229E9C5A27ECED3D9", // Gy
     "1000000000000000000000000000000014DEF9DEA2F79CD65812631A5CF5D3ED", // order (n)
-    "1.3.101.110"                                                       // oid
+    "1.3.101.110",                                                      // oid
+    {},
 };
 #endif
 
@@ -4290,7 +4298,7 @@ void _private_tls_create_hash(struct TLSContext *context) {
         return;
     TLSHash *hash = _private_tls_ensure_hash(context);
     if ((context->version == TLS_V12) || (context->version == DTLS_V12) || (context->version == TLS_V13) || (context->version == DTLS_V13)) {
-        int hash_size = _private_tls_mac_length(context);
+        int hash_size __attribute_maybe_unused__ = _private_tls_mac_length(context);
         if (hash->created) {
             unsigned char temp[TLS_MAX_SHA_SIZE];
             sha384_done(&hash->hash32, temp);
@@ -5795,7 +5803,7 @@ struct TLSPacket *tls_build_hello(struct TLSContext *context, int tls13_downgrad
         else
             memcpy(context->local_random + TLS_SERVER_RANDOM_SIZE - 8, "DOWNGRD\x00", 8);
     }
-    unsigned short packet_version = context->version;
+    unsigned short packet_version __attribute_maybe_unused__ = context->version;
     unsigned short version = context->version;
 #ifdef WITH_TLS_13
     if (context->version == TLS_V13)
@@ -6518,7 +6526,7 @@ int _private_dtls_check_packet(struct TLSContext *context, const unsigned char *
     unsigned int fragment_length = buf[8] * 0x10000 + buf[9] * 0x100 + buf[10];
 
     if ((fragment_offset) || (fragment_length != bytes_to_follow)) {
-        if ((context->dtls_data->fragment) && (context->dtls_data->fragment->written == bytes_to_follow))
+        if ((context->dtls_data->fragment) && ((unsigned int)context->dtls_data->fragment->written == bytes_to_follow))
             return bytes_to_follow;
 
         return TLS_FEATURE_NOT_SUPPORTED;
@@ -7188,7 +7196,7 @@ int tls_parse_certificate(struct TLSContext *context, const unsigned char *buf, 
     CHECK_SIZE(size_of_all_certificates, buf_len - res, TLS_NEED_MORE_DATA);
     int size = size_of_all_certificates;
     
-    int idx = 0;
+    int idx __attribute_maybe_unused__ = 0;
     int valid_certificate = 0;
     while (size > 0) {
         idx++;
@@ -7197,7 +7205,7 @@ int tls_parse_certificate(struct TLSContext *context, const unsigned char *buf, 
         res += 3;
         CHECK_SIZE(certificate_size, buf_len - res, TLS_NEED_MORE_DATA)
         // load chain
-        int certificates_in_chain = 0;
+        int certificates_in_chain __attribute_maybe_unused__ = 0;
         int res2 = res;
         unsigned int remaining = certificate_size;
         do {
@@ -7959,7 +7967,7 @@ void _private_dtls_reset_handshake(struct TLSContext *context) {
 
         if (context->is_server) {
             if (context->client_certificates) {
-                int i;
+                unsigned int i;
                 for (i = 0; i < context->client_certificates_count; i++)
                     tls_destroy_certificate(context->client_certificates[i]);
                 TLS_FREE(context->client_certificates);
@@ -10090,7 +10098,7 @@ int tls_consume_stream(struct TLSContext *context, const unsigned char *buf, int
         tls_size_offset = 3;
         tls_header_size = 5;
     }
-    while (tls_buffer_len >= tls_header_size) {
+    while (tls_buffer_len >= (unsigned int)tls_header_size) {
         unsigned int length = ntohs(*(unsigned short *)&context->message_buffer[index + tls_size_offset]) + tls_header_size;
         if (length > tls_buffer_len) {
             DEBUG_PRINT("NEED DATA: %i/%i\n", length, tls_buffer_len);
@@ -10662,10 +10670,10 @@ int tls_stun_parse(unsigned char *msg, int len, char *pwd, int pwd_len, unsigned
     if (msg_len > len - 20)
         return -1;
 
-    const unsigned char *magic_cookie = &msg[4];
-    const unsigned char *transaction_id = &msg[8];
+    const unsigned char *magic_cookie __attribute_maybe_unused__ = &msg[4];
+    const unsigned char *transaction_id __attribute_maybe_unused__= &msg[8];
 
-    const unsigned char *attributes = &msg[20];
+    const unsigned char *attributes __attribute_maybe_unused__ = &msg[20];
 
     switch (type) {
         case 0x0001:
@@ -10691,7 +10699,7 @@ int tls_stun_parse(unsigned char *msg, int len, char *pwd, int pwd_len, unsigned
     memset(hash, 0, sizeof(hash));
     int stun_message_len = 20;
 
-    unsigned char secret[16];
+    unsigned char secret[16] __attribute_maybe_unused__;
 
     char key[0x4CE];
 
@@ -10701,14 +10709,14 @@ int tls_stun_parse(unsigned char *msg, int len, char *pwd, int pwd_len, unsigned
     unsigned char *realm = NULL;
     int realm_len = 0;
 
-    unsigned char *nonce = NULL;
-    int nonce_len = 0;
+    unsigned char *nonce __attribute_maybe_unused__ = NULL;
+    int nonce_len __attribute_maybe_unused__ = 0;
 
     char *ptr;
 
     int validated = 0;
 
-    uint32_t priority = 0;
+    uint32_t priority __attribute_maybe_unused__ = 0;
 
     while (msg_len >= 4) {
         unsigned short attr_type = ntohs(*(unsigned short *)msg);
@@ -10926,7 +10934,7 @@ int tls_stun_build(unsigned char transaction_id[12], char *username, int usernam
 
     memcpy(msg + 8, transaction_id, 12);
 
-    unsigned char *ptr = msg + 20;
+    unsigned char *ptr __attribute_maybe_unused__ = msg + 20;
 
     int len = 20;
     if ((username) && (username_len > 0) && (username_len <= 513))  {
@@ -11092,7 +11100,7 @@ int tls_default_verify(struct TLSContext *context, struct TLSCertificate **certi
     return no_error;
 }
 
-int tls_unmake_ktls(struct TLSContext *context, int socket) {
+int tls_unmake_ktls(struct TLSContext *context __attribute_maybe_unused__, int socket __attribute_maybe_unused__) {
 #ifdef WITH_KTLS
     struct tls12_crypto_info_aes_gcm_128 crypto_info;
     socklen_t crypt_info_size = sizeof(crypto_info);
@@ -11117,7 +11125,7 @@ int tls_unmake_ktls(struct TLSContext *context, int socket) {
     return TLS_FEATURE_NOT_SUPPORTED;
 }
 
-int tls_make_ktls(struct TLSContext *context, int socket) {
+int tls_make_ktls(struct TLSContext *context, int socket __attribute_maybe_unused__) {
     if ((!context) || (context->critical_error) || (context->connection_status != 0xFF) || (!context->crypto.created)) {
         DEBUG_PRINT("CANNOT SWITCH TO kTLS\n");
         return TLS_GENERIC_ERROR;
@@ -11471,7 +11479,7 @@ int tls_peerconnection_connect(struct TLSRTCPeerConnection *channel, tls_peercon
     return write_function(channel, msg, len);
 }
 
-void _private_dtls_ensure_keys(struct TLSRTCPeerConnection *channel) {
+void _private_dtls_ensure_keys(struct TLSRTCPeerConnection *channel __attribute_maybe_unused__) {
 #ifdef TLS_SRTP
     if ((channel->remote_state != 3) && (tls_established(channel->context) == 1)) {
         DEBUG_PRINT("******** HAVE REMOTE SRTP KEY ***********\n");
